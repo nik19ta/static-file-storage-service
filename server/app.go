@@ -45,6 +45,10 @@ func (a *App) Run(port string) error {
 
 	router.LoadHTMLGlob("templates/*.html")
 
+	router.StaticFS("/assets", http.Dir("templates/static"))
+	router.StaticFS("/style", http.Dir("templates/style"))
+	router.StaticFS("/script", http.Dir("templates/script"))
+
 	uploadhttp.RegisterHTTPEndpoints(router, a.uploadApiLoadUC)
 
 	a.httpServer = &http.Server{
